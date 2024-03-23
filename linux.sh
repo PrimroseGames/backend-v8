@@ -30,7 +30,7 @@ echo "=====[ add ArrayBuffer_New_Without_Stl ]====="
 node $GITHUB_WORKSPACE/node-script/add_arraybuffer_new_without_stl.js .
 
 echo "=====[ Building V8 ]====="
-python ./tools/dev/v8gen.py x64.release -vv -- '
+python ./tools/dev/v8gen.py x64.debug -vv -- '
 is_debug = false
 v8_enable_i18n_support= false
 v8_use_snapshot = true
@@ -42,10 +42,10 @@ libcxx_abi_unstable = false
 v8_enable_pointer_compression=false
 '
 
-ninja -C out.gn/x64.release -t clean
-ninja -C out.gn/x64.release wee8
+ninja -C out.gn/x64.debug -t clean
+ninja -C out.gn/x64.debug wee8
 
 mkdir -p output/v8/Lib/Linux
-cp out.gn/x64.release/obj/libwee8.a output/v8/Lib/Linux/
+cp out.gn/x64.debug/obj/libwee8.a output/v8/Lib/Linux
 mkdir -p output/v8/Inc/Blob/Linux
 
